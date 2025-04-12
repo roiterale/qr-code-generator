@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de QR Code</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #2e2e2e);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      text-align: center;
+      max-width: 90vw;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    input {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #555;
+      background-color: #1f1f1f;
+      color: #fff;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #444, #666);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #666, #888);
+    }
+
+    #qrcode {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Gerador de QR Code</h1>
+    <input type="text" id="text" placeholder="Digite seu texto ou link aqui" />
+    <br>
+    <button onclick="gerarQRCode()">Gerar QR Code</button>
+    <div id="qrcode"></div>
+  </div>
+
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    function gerarQRCode() {
+      const texto = document.getElementById("text").value;
+      const qrCodeDiv = document.getElementById("qrcode");
+
+      qrCodeDiv.innerHTML = "";
+
+      if (texto.trim() !== "") {
+        new QRCode(qrCodeDiv, {
+          text: texto,
+          width: 250,
+          height: 250,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      } else {
+        alert("Por favor, insira um texto.");
+      }
+    }
+  </script>
+
+</body>
+</html>
